@@ -5,13 +5,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 
+import jangalang.engine.Game;
+import jangalang.engine.GameState;
 import jangalang.game.Player;
 
 import java.util.HashSet;
 
 public class PlayingState implements GameMode {
     HashSet<String> keySet = new HashSet<String>();
-    Player player = new Player(150, 150, 5);
+    Player player = Game.getPlayer();
 
     @Override
     public void update() {
@@ -40,6 +42,7 @@ public class PlayingState implements GameMode {
             case KeyEvent.VK_A -> keySet.add("a");
             case KeyEvent.VK_S -> keySet.add("s");
             case KeyEvent.VK_D -> keySet.add("d");
+            case KeyEvent.VK_ESCAPE -> Game.setGameState(GameState.PAUSED);
         }
     }
 
