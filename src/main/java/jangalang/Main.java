@@ -3,6 +3,7 @@ package jangalang;
 import javax.swing.JFrame;
 import jangalang.util.GameProperties;
 import jangalang.engine.KeyScanner;
+import jangalang.engine.MouseScanner;
 import jangalang.game.Renderer;
 
 class Main {
@@ -19,6 +20,7 @@ class Main {
         gameWindow.setVisible(true);
         gameWindow.add(new Renderer());
         gameWindow.addKeyListener(new KeyScanner());
+        gameWindow.addMouseListener(new MouseScanner());
 
         return;
     }
