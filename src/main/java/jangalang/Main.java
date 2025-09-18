@@ -3,6 +3,7 @@ package jangalang;
 import javax.swing.JFrame;
 import jangalang.util.GameProperties;
 import jangalang.engine.KeyScanner;
+import jangalang.game.Renderer;
 
 class Main {
     public static final int WIDTH = Integer.parseInt(GameProperties.get("window.width"));
@@ -16,7 +17,7 @@ class Main {
         gameWindow.setTitle(GameProperties.get("game.name"));
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setVisible(true);
-        // gameWindow.add(/* add rendering */);
+        gameWindow.add(new Renderer());
         gameWindow.addKeyListener(new KeyScanner());
 
         return;
