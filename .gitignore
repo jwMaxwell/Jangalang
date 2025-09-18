@@ -4,3 +4,6 @@
 tmp/
 target/
 target/**
+.settings/
+.classpath
+.project

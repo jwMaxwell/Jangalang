@@ -1,7 +1,6 @@
 package jangalang.util;
 
 import java.util.Properties;
-import java.lang.Thread;
 import java.io.IOException;
 import java.io.InputStream;
 
