@@ -29,6 +29,10 @@ public class GameProperties {
         return gameProps.getProperty(key);
     }
 
+    public static int getInt(String key) {
+        return Integer.parseInt(gameProps.getProperty(key));
+    }
+
     public static String getOrDefault(String key, String defaultValue) {
         return gameProps.getProperty(key, defaultValue);
     }
