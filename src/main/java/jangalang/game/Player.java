@@ -1,12 +1,14 @@
 package jangalang.game;
 
+import jangalang.util.GameProperties;
+
 public class Player {
     private double xCoord;
     private double yCoord;
     private int size;
 
-    public static int RAY_COUNT = 1000;
-    public static double FOV = Math.toRadians(90);
+    public static int RAY_COUNT = GameProperties.getInt("game.user.resolution");
+    public static double FOV = Math.toRadians(GameProperties.getInt("game.user.fov"));
     private Vector[] rays = new Vector[RAY_COUNT];
     private double viewAngleOffset = 0;
 

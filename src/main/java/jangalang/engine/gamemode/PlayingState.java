@@ -9,6 +9,7 @@ import jangalang.engine.Game;
 import jangalang.engine.GameState;
 import jangalang.game.Player;
 import jangalang.game.Vector;
+import jangalang.util.GameProperties;
 
 import java.util.HashSet;
 
@@ -71,7 +72,7 @@ public class PlayingState implements GameMode {
 
     @Override
     public void mouseMoved(int e) {
-        player.rotate(e * 0.01);
+        player.rotate(e * GameProperties.getDouble("game.user.sensitivity"));
     }
 
     @Override

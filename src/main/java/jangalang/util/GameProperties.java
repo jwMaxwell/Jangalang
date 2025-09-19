@@ -33,6 +33,10 @@ public class GameProperties {
         return Integer.parseInt(gameProps.getProperty(key));
     }
 
+    public static double getDouble(String key) {
+        return Double.parseDouble(gameProps.getProperty(key));
+    }
+
     public static String getOrDefault(String key, String defaultValue) {
         return gameProps.getProperty(key, defaultValue);
     }
