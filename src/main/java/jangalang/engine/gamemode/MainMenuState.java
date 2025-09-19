@@ -60,7 +60,7 @@ public class MainMenuState implements GameMode {
     public void keyReleased(KeyEvent e) {}
 
     @Override
-    public void mouseMoved(MouseEvent e) {}
+    public void mouseMoved(int e) {}
 
     @Override
     public void mouseClicked(MouseEvent e) {}

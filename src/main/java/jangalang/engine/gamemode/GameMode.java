@@ -11,5 +11,5 @@ public interface GameMode {
     void keyPressed(KeyEvent e);
     void keyReleased(KeyEvent e);
     void mouseClicked(MouseEvent e);
-    void mouseMoved(MouseEvent e);
+    void mouseMoved(int e);
 }

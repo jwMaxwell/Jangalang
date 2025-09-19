@@ -7,8 +7,16 @@ import jangalang.engine.KeyScanner;
 import jangalang.engine.MouseScanner;
 
 class Main {
+    private static Renderer renderer;
+    private static KeyScanner keyScanner;
+    private static MouseScanner mouseScanner;
+
     public static void main(String[] args) {
-        new Window(new Renderer(), new KeyScanner(), new MouseScanner());
+        renderer = new Renderer();
+        keyScanner = new KeyScanner();
+        mouseScanner = new MouseScanner();
+
+        new Window(renderer, keyScanner, mouseScanner);
         GameLoop.run();
     }
 }

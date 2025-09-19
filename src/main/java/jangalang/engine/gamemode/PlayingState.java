@@ -70,11 +70,8 @@ public class PlayingState implements GameMode {
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
-        int dx = e.getX() - mouseX;
-        mouseX = e.getX();
-
-        player.rotate(dx * 0.01);
+    public void mouseMoved(int e) {
+        player.rotate(e * 0.01);
     }
 
     @Override

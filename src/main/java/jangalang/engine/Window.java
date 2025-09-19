@@ -35,6 +35,12 @@ public class Window {
         result.addMouseListener(this.mouseScanner);
         result.addMouseMotionListener(this.mouseScanner);
 
+        try {
+            mouseScanner.init(renderer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return result;
     }
 
