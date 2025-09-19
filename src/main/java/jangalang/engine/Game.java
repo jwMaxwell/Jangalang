@@ -1,6 +1,7 @@
 package jangalang.engine;
 
 import jangalang.engine.gamemode.GameMode;
+import jangalang.engine.gamemode.HelpState;
 import jangalang.engine.gamemode.MainMenuState;
 import jangalang.engine.gamemode.PauseState;
 import jangalang.engine.gamemode.PlayingState;
@@ -16,6 +17,7 @@ public class Game {
             case MAIN_MENU -> gameMode = new MainMenuState();
             case PLAYING -> gameMode = new PlayingState();
             case PAUSED -> gameMode = new PauseState();
+            case HELP -> gameMode = new HelpState();
         }
         System.out.println("State: " + state);
     }

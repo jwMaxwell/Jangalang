@@ -43,7 +43,7 @@ public class PlayingState implements GameMode {
             g.setColor(v.equals(player.getViewAngle()) ? Color.YELLOW : Color.GREEN);
             g.drawLine((int)player.getXCoord() + player.getSize() / 2,
                        (int)player.getYCoord() + player.getSize() / 2,
-                       (int)player.getXCoord() + (int)(v.x * 100),
+                       (int)player.getXCoord() + (int)(v.x * 100), // TODO: replace `* 100` with a marching function
                        (int)player.getYCoord() + (int)(v.y * 100));
         }
     }
