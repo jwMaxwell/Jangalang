@@ -3,8 +3,13 @@ package jangalang.engine;
 import javax.swing.JFrame;
 import javax.swing.JComponent;
 import jangalang.util.GameProperties;
+
+import java.awt.Cursor;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 
 public class Window {
     private static final int WIDTH = GameProperties.getInt("window.width");
@@ -39,6 +44,13 @@ public class Window {
             mouseScanner.init(renderer);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        if (GameProperties.get("game.user.hidemouse").equals("true")) {
+            Toolkit toolkit = Toolkit.getDefaultToolkit();
+            BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+            Cursor blankCursor = toolkit.createCustomCursor(cursorImg, new Point(0, 0), "blank");
+            result.setCursor(blankCursor);
         }
 
         return result;
