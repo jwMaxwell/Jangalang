@@ -12,9 +12,9 @@ public class Window {
     private static JFrame gameWindow;
     private static JComponent renderer;
     private static KeyListener keyScanner;
-    private static MouseListener mouseScanner;
+    private static MouseScanner mouseScanner;
 
-    public Window(JComponent renderer, KeyListener keyScanner, MouseListener mouseScanner) {
+    public Window(JComponent renderer, KeyListener keyScanner, MouseScanner mouseScanner) {
         this.renderer = renderer;
         this.keyScanner = keyScanner;
         this.mouseScanner = mouseScanner;
@@ -33,6 +33,7 @@ public class Window {
         result.add(this.renderer);
         result.addKeyListener(this.keyScanner);
         result.addMouseListener(this.mouseScanner);
+        result.addMouseMotionListener(this.mouseScanner);
 
         return result;
     }

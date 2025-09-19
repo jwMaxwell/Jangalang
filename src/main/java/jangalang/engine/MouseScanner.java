@@ -2,8 +2,17 @@ package jangalang.engine;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class MouseScanner implements MouseListener {
+public class MouseScanner implements MouseListener, MouseMotionListener {
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        Game.getMode().mouseMoved(e);
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {}
+
     @Override
     public void mousePressed(MouseEvent e) {}
 
@@ -17,5 +26,7 @@ public class MouseScanner implements MouseListener {
     public void mouseExited(MouseEvent e) {}
 
     @Override
-    public void mouseClicked(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+        Game.getMode().mouseClicked(e);
+    }
 }

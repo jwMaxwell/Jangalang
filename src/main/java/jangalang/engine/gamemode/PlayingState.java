@@ -8,21 +8,24 @@ import javax.swing.JPanel;
 import jangalang.engine.Game;
 import jangalang.engine.GameState;
 import jangalang.game.Player;
+import jangalang.game.Vector;
 
 import java.util.HashSet;
 
 public class PlayingState implements GameMode {
-    HashSet<String> keySet = new HashSet<String>();
-    Player player = Game.getPlayer();
+    private HashSet<String> keySet = new HashSet<String>();
+    private Player player = Game.getPlayer();
+    private int mouseX = 0;
 
     @Override
     public void update() {
+        Vector direction = player.getViewAngle();
         for (String key : keySet) {
             switch (key) {
-                case "w" -> player.move(0, -1);
-                case "a" -> player.move(-1, 0);
-                case "s" -> player.move(0, 1);
-                case "d" -> player.move(1, 0);
+                case "w" -> player.move(direction.x, direction.y);
+                case "a" -> player.move(direction.y, -direction.x);
+                case "s" -> player.move(-direction.x, -direction.y);
+                case "d" -> player.move(-direction.y, direction.x);
             }
         }
     }
@@ -31,8 +34,18 @@ public class PlayingState implements GameMode {
     public void render(JPanel window, Graphics g) {
         window.setBackground(Color.BLACK);
 
+        // Draw player
         g.setColor(Color.RED);
         g.fillOval((int)player.getXCoord(), (int)player.getYCoord(), player.getSize(), player.getSize());
+
+        // Draw rays
+        for (Vector v : player.getRays()) {
+            g.setColor(v.equals(player.getViewAngle()) ? Color.YELLOW : Color.GREEN);
+            g.drawLine((int)player.getXCoord() + player.getSize() / 2,
+                       (int)player.getYCoord() + player.getSize() / 2,
+                       (int)player.getXCoord() + (int)(v.x * 100),
+                       (int)player.getYCoord() + (int)(v.y * 100));
+        }
     }
 
     @Override
@@ -57,7 +70,13 @@ public class PlayingState implements GameMode {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
+    public void mouseMoved(MouseEvent e) {
+        int dx = e.getX() - mouseX;
+        mouseX = e.getX();
 
+        player.rotate(dx * 0.01);
     }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {}
 }
