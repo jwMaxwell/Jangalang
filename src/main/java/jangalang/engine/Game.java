@@ -5,7 +5,6 @@ import jangalang.engine.gamemode.HelpState;
 import jangalang.engine.gamemode.MainMenuState;
 import jangalang.engine.gamemode.PauseState;
 import jangalang.engine.gamemode.PlayingState;
-import jangalang.engine.GameState;
 import jangalang.game.Player;
 import jangalang.engine.maps.Map;
 import jangalang.engine.maps.MapLoader;
@@ -24,7 +23,6 @@ public class Game {
             case PAUSED -> gameMode = new PauseState();
             case HELP -> gameMode = new HelpState();
         }
-        System.out.println("State: " + state);
     }
 
     public static GameMode getMode() {

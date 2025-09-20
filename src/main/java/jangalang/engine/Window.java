@@ -8,7 +8,6 @@ import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 public class Window {
@@ -19,11 +18,11 @@ public class Window {
     private static KeyListener keyScanner;
     private static MouseScanner mouseScanner;
 
-    public Window(JComponent renderer, KeyListener keyScanner, MouseScanner mouseScanner) {
-        this.renderer = renderer;
-        this.keyScanner = keyScanner;
-        this.mouseScanner = mouseScanner;
-        this.gameWindow = this.createWindow();
+    public Window(JComponent _renderer, KeyListener _keyScanner, MouseScanner _mouseScanner) {
+        renderer = _renderer;
+        keyScanner = _keyScanner;
+        mouseScanner = _mouseScanner;
+        gameWindow = this.createWindow();
     }
 
     private JFrame createWindow() {
@@ -35,10 +34,10 @@ public class Window {
         result.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         result.setVisible(true);
 
-        result.add(this.renderer);
-        result.addKeyListener(this.keyScanner);
-        result.addMouseListener(this.mouseScanner);
-        result.addMouseMotionListener(this.mouseScanner);
+        result.add(renderer);
+        result.addKeyListener(keyScanner);
+        result.addMouseListener(mouseScanner);
+        result.addMouseMotionListener(mouseScanner);
 
         try {
             mouseScanner.init(renderer);

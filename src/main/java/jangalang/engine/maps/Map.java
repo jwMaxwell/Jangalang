@@ -2,7 +2,6 @@ package jangalang.engine.maps;
 
 import java.util.ArrayList;
 import jangalang.util.types.Pair;
-import jangalang.engine.maps.Wall;
 
 public class Map {
     private ArrayList<Pair<Double, Double>> spawns;

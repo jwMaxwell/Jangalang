@@ -54,6 +54,7 @@ public class PlayingState implements GameMode {
         for (Vector v : player.getRays()) {
             double closest = Double.MAX_VALUE;
 
+            // Calculate ray length
             for (Wall wall : gameMap.getWalls()) {
                 Double u = wall.rayIntersect(
                     player.getXCoord() + player.getSize() / 2,
@@ -63,6 +64,7 @@ public class PlayingState implements GameMode {
                 if (u != null && u < closest) closest = u;
             }
 
+            // Draw that sucker
             if (closest != Double.MAX_VALUE) {
                 g.drawLine(
                     (int)player.getXCoord() + player.getSize() / 2,
@@ -72,15 +74,6 @@ public class PlayingState implements GameMode {
                 );
             }
         }
-
-        // // Draw rays
-        // for (Vector v : player.getRays()) {
-        //     g.setColor(v.equals(player.getViewAngle()) ? Color.BLUE : Color.GREEN);
-        //     g.drawLine((int)player.getXCoord() + player.getSize() / 2,
-        //                (int)player.getYCoord() + player.getSize() / 2,
-        //                (int)player.getXCoord() + (int)(v.x * 100), // TODO: replace `* 100` with a marching function
-        //                (int)player.getYCoord() + (int)(v.y * 100));
-        // }
     }
 
     @Override
