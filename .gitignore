@@ -8,3 +8,4 @@ target/**
 .classpath
 .project
 dependency-reduced-pom.xml
+/src/main/resources/application.properties

@@ -10,7 +10,7 @@ public class Player {
     private double yCoord;
     private int size;
 
-    public static double RAY_MAX_LENGTH = 250.0;
+    public static double RAY_MAX_LENGTH = GameProperties.getDouble("game.user.viewdist");
     public static int RAY_COUNT = GameProperties.getInt("game.user.resolution");
     public static double FOV = Math.toRadians(GameProperties.getInt("game.user.fov"));
     private Vector[] rays = new Vector[RAY_COUNT];

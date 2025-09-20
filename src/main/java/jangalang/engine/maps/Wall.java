@@ -30,13 +30,13 @@ public class Wall {
         // Vector math: distance from circle center to line segment
         double dx = x2 - x1;
         double dy = y2 - y1;
-        double t = ((cx - x1) * dx + (cy - y1) * dy) / (dx*dx + dy*dy);
+        double t = ((cx - x1) * dx + (cy - y1) * dy) / (dx * dx + dy * dy);
 
-        t = Math.max(0, Math.min(1, t)); // clamp to segment
+        t = Math.clamp(t, 0, 1);
         double closestX = x1 + t * dx;
         double closestY = y1 + t * dy;
 
-        double distSq = (cx - closestX)*(cx - closestX) + (cy - closestY)*(cy - closestY);
+        double distSq = (cx - closestX) * (cx - closestX) + (cy - closestY) * (cy - closestY);
         return distSq <= radius*radius;
     }
 
@@ -49,9 +49,9 @@ public class Wall {
         double sx = x2 - x1;
         double sy = y2 - y1;
 
-        double denom = rdx * sy - rdy * sx; // r.x * s.y - r.y * s.x
+        double denom = rdx * sy - rdy * sx;
         if (Math.abs(denom) < 1e-9)
-            return null; // parallel or nearly so
+            return null; // parallel
 
         double qx = rx - x1;
         double qy = ry - y1;
