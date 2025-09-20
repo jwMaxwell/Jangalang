@@ -19,17 +19,16 @@ public class PlayingState implements GameMode {
     private HashSet<String> keySet = new HashSet<String>();
     private Player player = Game.getPlayer();
     private Map gameMap = Game.getMap();
-    private int mouseX = 0;
 
     @Override
     public void update() {
         Vector direction = player.getViewAngle();
         for (String key : keySet) {
             switch (key) {
-                case "w" -> player.move(direction.x, direction.y);
-                case "a" -> player.move(direction.y, -direction.x);
-                case "s" -> player.move(-direction.x, -direction.y);
-                case "d" -> player.move(-direction.y, direction.x);
+                case "w" -> player.move(gameMap, direction.x, direction.y);
+                case "a" -> player.move(gameMap, direction.y, -direction.x);
+                case "s" -> player.move(gameMap, -direction.x, -direction.y);
+                case "d" -> player.move(gameMap, -direction.y, direction.x);
             }
         }
     }
@@ -53,12 +52,35 @@ public class PlayingState implements GameMode {
 
         // Draw rays
         for (Vector v : player.getRays()) {
-            g.setColor(v.equals(player.getViewAngle()) ? Color.BLUE : Color.GREEN);
-            g.drawLine((int)player.getXCoord() + player.getSize() / 2,
-                       (int)player.getYCoord() + player.getSize() / 2,
-                       (int)player.getXCoord() + (int)(v.x * 100), // TODO: replace `* 100` with a marching function
-                       (int)player.getYCoord() + (int)(v.y * 100));
+            double closest = Double.MAX_VALUE;
+
+            for (Wall wall : gameMap.getWalls()) {
+                Double u = wall.rayIntersect(
+                    player.getXCoord() + player.getSize() / 2,
+                    player.getYCoord() + player.getSize() / 2,
+                    v.x, v.y
+                );
+                if (u != null && u < closest) closest = u;
+            }
+
+            if (closest != Double.MAX_VALUE) {
+                g.drawLine(
+                    (int)player.getXCoord() + player.getSize() / 2,
+                    (int)player.getYCoord() + player.getSize() / 2,
+                    (int)(player.getXCoord() + player.getSize() / 2 + v.x * Math.min(closest, Player.RAY_MAX_LENGTH)),
+                    (int)(player.getYCoord() + player.getSize() / 2 + v.y * Math.min(closest, Player.RAY_MAX_LENGTH))
+                );
+            }
         }
+
+        // // Draw rays
+        // for (Vector v : player.getRays()) {
+        //     g.setColor(v.equals(player.getViewAngle()) ? Color.BLUE : Color.GREEN);
+        //     g.drawLine((int)player.getXCoord() + player.getSize() / 2,
+        //                (int)player.getYCoord() + player.getSize() / 2,
+        //                (int)player.getXCoord() + (int)(v.x * 100), // TODO: replace `* 100` with a marching function
+        //                (int)player.getYCoord() + (int)(v.y * 100));
+        // }
     }
 
     @Override
