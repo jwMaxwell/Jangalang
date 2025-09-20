@@ -7,10 +7,15 @@ import jangalang.engine.gamemode.PauseState;
 import jangalang.engine.gamemode.PlayingState;
 import jangalang.engine.GameState;
 import jangalang.game.Player;
+import jangalang.engine.maps.Map;
+import jangalang.engine.maps.MapLoader;
+import jangalang.util.types.Pair;
 
 public class Game {
     private static GameMode gameMode = new MainMenuState();
-    private static Player player = new Player(150, 150, 5);
+    private static Map gameMap = MapLoader.parseMap("/maps/test.map");
+    private static final Pair<Double, Double> spawn = gameMap.getSpawns().getFirst();
+    private static Player player = new Player(spawn.getKey(), spawn.getValue(), 5);
 
     public static void setGameState(GameState state) {
         switch (state) {
@@ -28,5 +33,9 @@ public class Game {
 
     public static Player getPlayer() {
         return player;
+    }
+
+    public static Map getMap() {
+        return gameMap;
     }
 }

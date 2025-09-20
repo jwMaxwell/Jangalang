@@ -1,6 +1,7 @@
 package jangalang.game;
 
 import jangalang.util.GameProperties;
+import jangalang.util.types.Vector;
 
 public class Player {
     private double xCoord;

@@ -1,4 +1,4 @@
-package jangalang.game;
+package jangalang.util.types;
 
 public class Vector {
     public double x;

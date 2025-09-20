@@ -7,8 +7,10 @@ import javax.swing.JPanel;
 
 import jangalang.engine.Game;
 import jangalang.engine.GameState;
+import jangalang.engine.maps.Map;
+import jangalang.engine.maps.Wall;
 import jangalang.game.Player;
-import jangalang.game.Vector;
+import jangalang.util.types.Vector;
 import jangalang.util.GameProperties;
 
 import java.util.HashSet;
@@ -16,6 +18,7 @@ import java.util.HashSet;
 public class PlayingState implements GameMode {
     private HashSet<String> keySet = new HashSet<String>();
     private Player player = Game.getPlayer();
+    private Map gameMap = Game.getMap();
     private int mouseX = 0;
 
     @Override
@@ -35,13 +38,22 @@ public class PlayingState implements GameMode {
     public void render(JPanel window, Graphics g) {
         window.setBackground(Color.BLACK);
 
+        // Draw walls
+        g.setColor(Color.GRAY);
+        for (Wall wall : gameMap.getWalls()) {
+            g.drawLine((int)(double) wall.start.getKey(),
+                       (int)(double)wall.start.getValue(),
+                       (int)(double)wall.end.getKey(),
+                       (int)(double)wall.end.getValue());
+        }
+
         // Draw player
         g.setColor(Color.RED);
         g.fillOval((int)player.getXCoord(), (int)player.getYCoord(), player.getSize(), player.getSize());
 
         // Draw rays
         for (Vector v : player.getRays()) {
-            g.setColor(v.equals(player.getViewAngle()) ? Color.YELLOW : Color.GREEN);
+            g.setColor(v.equals(player.getViewAngle()) ? Color.BLUE : Color.GREEN);
             g.drawLine((int)player.getXCoord() + player.getSize() / 2,
                        (int)player.getYCoord() + player.getSize() / 2,
                        (int)player.getXCoord() + (int)(v.x * 100), // TODO: replace `* 100` with a marching function
