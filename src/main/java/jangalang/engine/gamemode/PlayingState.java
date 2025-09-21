@@ -22,15 +22,30 @@ public class PlayingState implements GameMode {
 
     @Override
     public void update() {
-        Vector direction = player.getViewAngle();
-        for (String key : keySet) {
-            switch (key) {
-                case "w" -> player.move(gameMap, direction.x, direction.y);
-                case "a" -> player.move(gameMap, direction.y, -direction.x);
-                case "s" -> player.move(gameMap, -direction.x, -direction.y);
-                case "d" -> player.move(gameMap, -direction.y, direction.x);
-            }
+        // Update player location
+        double dirX = 0;
+        double dirY = 0;
+        Vector forward = player.getViewAngle();
+
+        if (keySet.contains("w")) {
+            dirX += forward.x;
+            dirY += forward.y;
         }
+        if (keySet.contains("s")) {
+            dirX -= forward.x;
+            dirY -= forward.y;
+        }
+        if (keySet.contains("a")) {
+            dirX += forward.y;
+            dirY -= forward.x;
+        }
+        if (keySet.contains("d")) {
+            dirX -= forward.y;
+            dirY += forward.x;
+        }
+
+        boolean accelerating = !keySet.isEmpty();
+        player.move(gameMap, dirX, dirY, accelerating);
     }
 
     @Override
@@ -40,7 +55,7 @@ public class PlayingState implements GameMode {
         // Draw walls
         g.setColor(Color.GRAY);
         for (Wall wall : gameMap.getWalls()) {
-            g.drawLine((int)(double) wall.start.getKey(),
+            g.drawLine((int)(double)wall.start.getKey(),
                        (int)(double)wall.start.getValue(),
                        (int)(double)wall.end.getKey(),
                        (int)(double)wall.end.getValue());
@@ -65,6 +80,7 @@ public class PlayingState implements GameMode {
             }
 
             // Draw that sucker
+            g.setColor(Color.YELLOW);
             if (closest != Double.MAX_VALUE) {
                 g.drawLine(
                     (int)player.getXCoord() + player.getSize() / 2,
